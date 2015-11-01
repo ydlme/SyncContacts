@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:layout_margin="3.0dip">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/call_name"
+            android:text="姓名"
+            android:textSize="21dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/call_date"
+            android:layout_toRightOf="@+id/call_name"
+            android:layout_marginLeft="36dp"
+            android:text="2015/09/15 21:23"
+            android:textSize="12dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/call_name"
+            android:id="@+id/call_number"
+            android:text="13262986132"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
+
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_below="@+id/call_name"
+            android:layout_toRightOf="@+id/call_number"
+            android:id="@+id/call_type"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/call_make" />
+
+    </RelativeLayout>
+</FrameLayout>

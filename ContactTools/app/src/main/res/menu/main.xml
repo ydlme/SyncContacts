@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.prgguru.example.MainActivity" >
+
+    <item
+        android:id="@+id/sync_bar"
+        android:orderInCategory="100"
+        android:title="@string/sync"
+        app:showAsAction="always"
+        android:icon="@drawable/sync_clicked"
+        />
+
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="100"
+        android:title="@string/about"
+        app:showAsAction="ifRoom"/>
+
+</menu>

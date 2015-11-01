@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:layout_margin="3.0dip">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sms_name"
+            android:text="姓名"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginLeft="23dp"
+            android:layout_toRightOf="@+id/sms_name"
+            android:layout_above="@+id/sms_content"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/msg_recv"
+            android:id="@+id/sms_type"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sms_name"
+            android:id="@+id/sms_content"
+            android:text="13262986132"
+            android:textSize="14dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sms_content"
+            android:layout_alignParentRight="true"
+            android:id="@+id/sms_date"
+            android:text="2015/09/24 21:45"
+            android:textSize="12dp"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+</FrameLayout>
