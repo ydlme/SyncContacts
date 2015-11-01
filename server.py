@@ -41,8 +41,8 @@ class SyncContactsHandler(tornado.web.RequestHandler):
             poll_celery_task)
 
     def on_sync_finish(self, response):
-        print response
-        self.write(str(response))
+        result = '{\"contacts\": %s}' % response
+        self.write(result)
         self.finish()
 
 
@@ -126,7 +126,6 @@ class SyncMsgsHandler(tornado.web.RequestHandler):
             poll_celery_task)
 
     def on_sync_finish(self, response):
-        print response
         self.write(str(response))
         self.finish()
 
@@ -154,7 +153,6 @@ class SyncCalllogsHandler(tornado.web.RequestHandler):
             poll_celery_task)
 
     def on_sync_finish(self, response):
-        print response
         self.write(str(response))
         self.finish()
 

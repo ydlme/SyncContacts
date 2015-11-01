@@ -11,9 +11,9 @@ app = Celery(backend='amqp', broker='amqp://')
 def encode_contacts_json(diff):
     if len(diff) == 0:
         return str(diff)
-    str_json = '[{\'fphone\':\'%s\', \'fname\':\'%s\'}' % (diff[0][0], diff[0][1])
-    for idx in (1, len(diff)):
-        item = ',{\'fphone\':\'%s\', \'fname\':\'%s\'}' % (diff[idx][0], diff[idx][1])
+    str_json = '[{\"fphone\":\"%s\", \"fname\":\"%s\"}' % (diff[0][0], diff[0][1])
+    for idx in range(1, len(diff)):
+        item = ',{\"fphone\":\"%s\", \"fname\":\"%s\"}' % (diff[idx][0], diff[idx][1])
         str_json = str_json + item
     str_json = str_json + ']'
     return str_json
@@ -22,11 +22,11 @@ def encode_contacts_json(diff):
 def encode_calllogs_json(diff):
     if len(diff) == 0:
         return str(diff)
-    str_json = '[{\'fphone\':\'%s\', \'fname\':\'%s\', \'type\':%d, \
-    \'long_date\':%d}' % (diff[0][0], diff[0][1], diff[0][2], diff[0][3])
-    for idx in (1, len(diff)):
-        item = ',{\'fphone\':\'%s\', \'fname\':\'%s\', \'type\':%d, \
-                \'long_date\':%d}' % (diff[idx][0], diff[idx][1], diff[idx][2], diff[idx][3])
+    str_json = '[{\"fphone\":\"%s\", \"fname\":\"%s\", \"type\":%d, \
+    \"long_date\":%d}' % (diff[0][0], diff[0][1], diff[0][2], diff[0][3])
+    for idx in range(1, len(diff)):
+        item = ',{\"fphone\":\"%s\", \"fname\":\"%s\", \"type\":%d, \
+                \"long_date\":%d}' % (diff[idx][0], diff[idx][1], diff[idx][2], diff[idx][3])
         str_json = str_json + item
     str_json = str_json + ']'
     return str_json
@@ -35,14 +35,30 @@ def encode_calllogs_json(diff):
 def encode_msg_json(diff):
     if len(diff) == 0:
         return str(diff)
-    str_json = '[{\'long_date\':%d, \'from_user\':\'%s\', \
-            \'msg\':\'%s\'}' % (diff[0][0], diff[0][1], diff[0][2])
+    str_json = '[{\"long_date\":%d, \"from_user\":\"%s\", \
+            \"msg\":\"%s\"}' % (diff[0][0], diff[0][1], diff[0][2])
     for idx in range(1, len(diff)):
-        item = ',{\'long_date\':%d, \'from_user\':\'%s\', \
-                \'msg\':\'%s\'}' % (diff[idx][0], diff[idx][1], diff[idx][2])
+        item = ',{\"long_date\":%d, \"from_user\":\"%s\", \
+                \"msg\":\"%s\"}' % (diff[idx][0], diff[idx][1], diff[idx][2])
         str_json = str_json + item
     str_json = str_json + ']'
     return str_json
+
+
+@app.task
+def celery_query_contacts(name, passwd):
+    uid = celery_user_login(name, passwd)
+    if uid == 0:
+        return []
+    conn = mysql_client_connect()
+    cursor = conn.cursor()
+    sql = 'select fname, fphone from tbl_contacts \
+            where uid={uid}'.format(uid=int(uid))
+    cursor.execute(sql)
+    row = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return row
 
 
 @app.task

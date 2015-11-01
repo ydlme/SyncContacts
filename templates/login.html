@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+    <head>
+
+        <meta charset="utf-8">
+        <title>用户登录</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{{ static_url("css/fonts.css") }}">
+        <link rel="stylesheet" href="{{ static_url("css/reset.css") }}">
+        <link rel="stylesheet" href="{{ static_url("css/supersized.css") }}">
+        <link rel="stylesheet" href="{{ static_url("style.css") }}">
+
+        <script type="text/ecmascript" src="{{ static_url("js/md5.js") }}"></script>
+        <script type="text/javascript">  
+        function onInput() {
+            user = document.getElementById('username').value
+            passwd = hex_md5(document.getElementById('passwd').value);
+            self.location='/contacts?user='+user+'&passwd='+passwd; 
+         }
+        </script>  
+    </head>
+    <body>
+        <div class="page-container">
+            <h1>Login</h1>
+            <form action="" method="post", id="form_login">
+                <input type="text" name="username" class="username" placeholder="Username", id="username">
+                <input type="password" name="password" class="password" placeholder="Password" id="passwd">
+                <div class="error"><span>+</span></div>
+            </form>
+
+           <button type="button" value="login" onClick='onInput()'>Sign me in</button>
+    
+        </div>
+
+        <!-- Javascript -->
+        <script src="{{ static_url("js/jquery-1.8.2.min.js") }}"></script>
+        <script src="{{ static_url("js/supersized.3.2.7.min.js") }}"></script>
+        <script src="{{ static_url("js/supersized-init.js") }}"></script>
+        <script src="{{ static_url("js/scripts.js") }}"></script>
+
+    </body>
+
+</html>
+
