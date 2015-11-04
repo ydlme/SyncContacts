@@ -42,6 +42,7 @@ class SyncContactsHandler(tornado.web.RequestHandler):
 
     def on_sync_finish(self, response):
         result = '{\"contacts\": %s}' % response
+        print result
         self.write(result)
         self.finish()
 
@@ -70,6 +71,7 @@ class UserRegisterHandler(tornado.web.RequestHandler):
 
     def on_register_finish(self, response):
         res = '{\'uid\':%s}' % (response)
+        print res
         self.write(res)
         self.finish()
 
@@ -98,6 +100,7 @@ class UserLoginHandler(tornado.web.RequestHandler):
 
     def on_login_finish(self, response):
         res = '{\'uid\':%s}' % (response)
+        print res
         self.write(res)
         self.finish()
 

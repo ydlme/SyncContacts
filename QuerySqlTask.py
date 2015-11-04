@@ -62,6 +62,38 @@ def celery_query_contacts(name, passwd):
 
 
 @app.task
+def celery_query_calllogs(name, passwd, stamp):
+    uid = celery_user_login(name, passwd)
+    if uid == 0:
+        return []
+    conn = mysql_client_connect()
+    cursor = conn.cursor()
+    sql = 'select fname, fphone, type from tbl_calllogs \
+            where long_date>{stamp} order by long_date desc'.format(stamp=stamp)
+    cursor.execute(sql)
+    row = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return row
+
+
+@app.task
+def celery_query_msgs(name, passwd):
+    uid = celery_user_login(name, passwd)
+    if uid == 0:
+        return []
+    conn = mysql_client_connect()
+    cursor = conn.cursor()
+    sql = 'select from_user, msg from tbl_msgs \
+            where uid={uid} order by long_date desc'.format(uid=int(uid))
+    cursor.execute(sql)
+    row = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return row
+
+
+@app.task
 def celery_sync_contacts(uid, contacts):
     json_contacts = json.loads(contacts)
     size = len(json_contacts)

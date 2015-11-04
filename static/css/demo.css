@@ -20,7 +20,9 @@ body {
 }
 
 a {
-	color: #31bc86;
+	/*color: #31bc86;*/
+	color: white;
+	font-size: 1.225em;
 	text-decoration: none;
 }
 

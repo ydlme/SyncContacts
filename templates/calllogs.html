@@ -5,20 +5,22 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<title>通讯录Web浏览</title>
+<title>通话记录Web浏览</title>
 
 <link rel="stylesheet" type="text/css" href="{{ static_url("css/normalize.css") }}" />
 <link rel="stylesheet" type="text/css" href="{{ static_url("css/demo.css") }}" />
+
 <!--必要样式-->
 <link rel="stylesheet" type="text/css" href="{{ static_url("css/component.css") }}" />
+
 </head>
 <body>
-
 <div class="container">
+	
 	<header>
 		<nav class="codrops-demos">
+			<a href="/contacts?{{user_info}}">联系人</a>
 			<a href="/msgs?{{user_info}}">短信记录</a>
-			<a href="/calllogs?{{user_info}}">通话记录</a>
 		</nav>
 	</header>
 
@@ -26,16 +28,23 @@
 		<table>
 			<thead>
 				<tr>
-					<th>姓名</th>
+					<th>联系人</th>
 					<th>手机号码</th>
-					<th>备注</th>
+					<th>方式</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for item in contacts %}
 				<tr>
 					<td class="user-name">{{ item[0] }}</td>
-					<td class="user-phone">{{ item[1] }}</td>
+					<td class="user-name">{{ item[1] }}</td>
+					{% if item[2] == 1 %}
+					<td class="user-phone">接听</td>
+					{% elif item[2] == 2 %}
+					<td class="user-phone">拨打</td>
+					{% else %}
+					<td class="user-phone">未接</td>
+					{% end %}
 				</tr>
 				{% end %}
 				
